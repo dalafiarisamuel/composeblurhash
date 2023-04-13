@@ -1,2 +1,1 @@
-# ComposeBlurHarsh [![BlurHasPainter](https://jitpack.io/v/dalafiarisamuel/ComposeBlurHarsh.svg)](https://jitpack.io/#dalafiarisamuel/ComposeBlurHarsh)
-
+# ComposeBlurHarsh [![ComposeBlurHarsh](https://jitpack.io/v/dalafiarisamuel/ComposeBlurHarsh.svg)](https://jitpack.io/#dalafiarisamuel/ComposeBlurHarsh)
