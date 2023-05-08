@@ -1,4 +1,4 @@
-package com.devtamuno.composeblurhash
+package com.devtamuno.composeblurhash.ext
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -28,8 +28,9 @@ fun rememberBlurHashPainter(
 
 }
 
+@Suppress("unused")
 @Composable
-fun rememberBlurHashBrush(
+private fun rememberBlurHashBrush(
     blurString: String,
     width: Int,
     height: Int,
