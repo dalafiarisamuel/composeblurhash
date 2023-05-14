@@ -77,3 +77,9 @@ fun BlurHashPainterCoilImage() {
 }
 ```
 
+# Apps using ComposeBlurHash
+- [unsplash-api-compose](https://github.com/dalafiarisamuel/unsplash-api-compose) - A project to display images from https://unsplash.com API using Jetpack Compose
+
+# App Screenshots
+<img src="./images/screenshot_1.png" alt="Screenshot 1" width="40%" height="40%" hspace="5"/><img src="./images/screenshot_2.png" alt="Screenshot 2" width="40%" height="40%"/><br>
+
