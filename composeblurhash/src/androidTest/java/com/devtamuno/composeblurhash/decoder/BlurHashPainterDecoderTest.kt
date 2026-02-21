@@ -89,6 +89,6 @@ fun Bitmap.assertEquals(bitmap2: Bitmap) {
     copyPixelsToBuffer(buffer1)
     val buffer2: ByteBuffer = ByteBuffer.allocate(bitmap2.height * bitmap2.rowBytes)
     bitmap2.copyPixelsToBuffer(buffer2)
-    val equals = Arrays.equals(buffer1.array(), buffer2.array())
+    val equals = buffer1.array().contentEquals(buffer2.array())
     assertTrue(equals)
 }
