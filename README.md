@@ -1,6 +1,7 @@
 # ComposeBlurHash 🎨
 
 [![ComposeBlurHash](https://jitpack.io/v/dalafiarisamuel/composeblurhash.svg)](https://jitpack.io/#dalafiarisamuel/composeblurhash)
+[![Binary Compatibility](https://github.com/dalafiarisamuel/composeblurhash/actions/workflows/validate-binary.yml/badge.svg?branch=main)](https://github.com/dalafiarisamuel/composeblurhash/actions/workflows/validate-binary.yml)
 
 **ComposeBlurHash** is a Jetpack Compose library that provides a simple way to display [BlurHash](https://blurha.sh/) placeholders while your high-resolution images are loading from the web.
 
