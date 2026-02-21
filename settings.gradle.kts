@@ -1,3 +1,6 @@
+rootProject.name = "ComposeBlurHarsh"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -10,9 +13,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven { url = uri("https://jitpack.io") }
     }
 }
-rootProject.name = "Compose BlurHarsh"
-include ':app'
-include ':composeblurhash'
+
+include(":app")
+include(":composeblurhash")
