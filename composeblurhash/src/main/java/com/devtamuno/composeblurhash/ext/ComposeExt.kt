@@ -6,13 +6,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
-import com.devtamuno.composeblurhash.ExperimentalComposeBlurHash
 import com.devtamuno.composeblurhash.decoder.BlurHasDecoderRequest
 import com.devtamuno.composeblurhash.decoder.BlurHashPainter
 import com.devtamuno.composeblurhash.decoder.ImageBitmapBrush
 
 @Composable
-@ExperimentalComposeBlurHash
 fun rememberBlurHashPainter(
     blurString: String,
     width: Int,
@@ -32,7 +30,6 @@ fun rememberBlurHashPainter(
 
 @Suppress("unused")
 @Composable
-@ExperimentalComposeBlurHash
 private fun rememberBlurHashBrush(
     blurString: String,
     width: Int,

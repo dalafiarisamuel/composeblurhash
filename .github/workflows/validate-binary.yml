@@ -1,0 +1,32 @@
+name: Check API Binary Compatibility
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: API Binary compatibility check
+        run: ./gradlew :composeblurhash:apiCheck --info

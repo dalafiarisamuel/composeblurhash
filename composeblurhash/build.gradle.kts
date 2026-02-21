@@ -2,13 +2,13 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.binary.compatibility.validator)
     id("maven-publish")
 }
 
 android {
     namespace = "com.devtamuno.composeblurhash"
     compileSdk = 36
-    version = "1.0.3"
 
     defaultConfig {
         minSdk = 21
@@ -30,7 +30,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    buildFeatures.compose= true
+    buildFeatures {
+        compose = true
+    }
 
     publishing {
         singleVariant("release") {
@@ -38,6 +40,10 @@ android {
             withJavadocJar()
         }
     }
+}
+
+apiValidation {
+    validationDisabled = false
 }
 
 dependencies {

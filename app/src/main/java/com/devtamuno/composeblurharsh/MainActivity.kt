@@ -26,9 +26,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.devtamuno.composeblurharsh.ui.theme.ComposeBlurHarshTheme
-import com.devtamuno.composeblurhash.ExperimentalComposeBlurHash
 import com.devtamuno.composeblurhash.ext.rememberBlurHashPainter
-@ExperimentalComposeBlurHash
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

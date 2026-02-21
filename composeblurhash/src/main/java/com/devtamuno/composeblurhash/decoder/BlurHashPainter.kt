@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package com.devtamuno.composeblurhash.decoder
 
 import androidx.compose.runtime.RememberObserver
@@ -10,7 +12,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
-import com.devtamuno.composeblurhash.ExperimentalComposeBlurHash
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,8 +22,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
-@ExperimentalComposeBlurHash
 class BlurHashPainter(request: BlurHasDecoderRequest) : Painter(), RememberObserver {
 
     private var rememberScope: CoroutineScope? = null
