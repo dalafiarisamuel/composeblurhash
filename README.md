@@ -1,23 +1,61 @@
-# ComposeBlurHash [![ComposeBlurHash](https://jitpack.io/v/dalafiarisamuel/composeblurhash.svg)](https://jitpack.io/#dalafiarisamuel/composeblurhash)
+# ComposeBlurHash 🎨
 
-The ComposeBlurHash is a component written in Jetpack Compose that comes with the required
-implementation to exhibit an image with a blurred effect until the actual image gets downloaded from
-the web.
+[![ComposeBlurHash](https://jitpack.io/v/dalafiarisamuel/composeblurhash.svg)](https://jitpack.io/#dalafiarisamuel/composeblurhash)
 
-# How to use:
+**ComposeBlurHash** is a Jetpack Compose library that provides a simple way to display [BlurHash](https://blurha.sh/) placeholders while your high-resolution images are loading from the web.
 
-- In build.gradle file, add this dependency
+## 🚀 Installation
 
-        implementation 'com.github.dalafiarisamuel:composeblurhash:latest_version'
+### 1. Add JitPack to `settings.gradle.kts`
 
-# Code sample:
+Add the JitPack repository to your `dependencyResolutionManagement` block:
 
-1. Using `rememberBlurHashPainter` component as a painter
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
+### 2. Add Dependency
+
+#### Using Version Catalog (Recommended)
+Add this to your `gradle/libs.versions.toml`:
+
+```toml
+[versions]
+composeblurhash = "1.0.3"
+
+[libraries]
+composeblurhash = { module = "com.github.dalafiarisamuel:composeblurhash", version.ref = "composeblurhash" }
+```
+
+Then, add it to your module's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation(libs.composeblurhash)
+}
+```
+
+#### Using traditional Gradle DSL
+```kotlin
+dependencies {
+    implementation("com.github.dalafiarisamuel:composeblurhash:1.0.3")
+}
+```
+
+## 📖 Usage
+
+### 1. Simple Image Placeholder
+Use `rememberBlurHashPainter` to create a painter that decodes the BlurHash string into a blurred image.
 
 ```kotlin
 @Composable
-fun BlurHashPainterImage() {
-
+fun BlurHashImageSample() {
     val blurHashPainter = rememberBlurHashPainter(
         blurString = "LvF7o6RiV@ofL4j?ozay4ptQkCfk",
         width = 4032,
@@ -25,61 +63,50 @@ fun BlurHashPainterImage() {
     )
 
     Card(
-        elevation = 24.dp,
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
+        modifier = Modifier.fillMaxWidth().height(250.dp)
     ) {
         Image(
             painter = blurHashPainter,
-            contentScale = ContentScale.FillBounds,
-            contentDescription = null,
-            modifier = Modifier
-                .width(250.dp)
-                .height(300.dp)
+            contentDescription = "Blurred Placeholder",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
-
 ```
 
-2. Using `rememberBlurHashPainter()` component as a `placeHolder`, `error` or `fallback` painter in [Coil](https://github.com/coil-kt/coil)
+### 2. Integration with Coil
+You can use `rememberBlurHashPainter` as a `placeholder` or `error` painter in **Coil**.
 
 ```kotlin
 @Composable
-fun BlurHashPainterCoilImage() {
-
-    val placeHolder = rememberBlurHashPainter(
+fun BlurHashCoilIntegration() {
+    val placeholder = rememberBlurHashPainter(
         blurString = "LvF7o6RiV@ofL4j?ozay4ptQkCfk",
         width = 4032,
         height = 3024,
     )
 
-    Card(
-        elevation = 24.dp,
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
-    ) {
-        AsyncImage(
-          model = "https://images.unsplash.com/photo-1587590010936-300da0d70b9e",
-            contentDescription = null,
-            placeholder = placeHolder,
-            contentScale = ContentScale.FillBounds,
-            error = placeHolder,
-            modifier = Modifier
-                .width(250.dp)
-                .height(300.dp)
-        )
-    }
+    AsyncImage(
+        model = "https://example.com/high_res_image.jpg",
+        contentDescription = "Loading Image",
+        placeholder = placeholder,
+        error = placeholder,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxWidth().height(250.dp)
+    )
 }
 ```
 
-# Apps using ComposeBlurHash
-- [unsplash-api-compose](https://github.com/dalafiarisamuel/unsplash-api-compose) - A project to display images from https://unsplash.com API using Jetpack Compose
+## 🌟 Apps using ComposeBlurHash
+- [unsplash-api-compose](https://github.com/dalafiarisamuel/unsplash-api-compose) - A project to display images from Unsplash API using Jetpack Compose.
 
-# App Screenshots
-<img src="./images/screenshot_1.png" alt="Screenshot 1" width="40%" height="40%" hspace="5"/><img src="./images/screenshot_2.png" alt="Screenshot 2" width="40%" height="40%"/><br>
+## 📸 Screenshots
+<p align="center">
+  <img src="./images/screenshot_1.png" alt="Screenshot 1" width="40%"/>
+  <img src="./images/screenshot_2.png" alt="Screenshot 2" width="40%"/>
+</p>
 
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
