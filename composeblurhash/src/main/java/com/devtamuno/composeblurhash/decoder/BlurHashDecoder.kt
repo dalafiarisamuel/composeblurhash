@@ -9,8 +9,11 @@ import kotlin.math.withSign
 
 
 /**
- * Code reference from: https://github.com/woltapp/blurhash/blob/master/Kotlin/lib/src/main/java/com/wolt/blurhashkt/BlurHashDecoder.kt
- * */
+ * Decodes a BlurHash string into an Android [Bitmap].
+ *
+ * This implementation is based on the original Kotlin implementation by Wolt.
+ * @see <a href="https://github.com/woltapp/blurhash/blob/master/Kotlin/lib/src/main/java/com/wolt/blurhashkt/BlurHashDecoder.kt">Wolt BlurHash Decoder</a>
+ */
 internal object BlurHashDecoder {
 
     // cache Math.cos() calculations to improve performance.
@@ -33,9 +36,12 @@ internal object BlurHashDecoder {
     /**
      * Decode a blur hash into a new bitmap.
      *
-     * @param useCache use in memory cache for the calculated math, reused by images with same size.
-     *                 if the cache does not exist yet it will be created and populated with new calculations.
-     *                 By default it is true.
+     * @param blurHash The BlurHash string to decode.
+     * @param width The target width of the resulting [Bitmap].
+     * @param height The target height of the resulting [Bitmap].
+     * @param punch The factor to adjust the color contrast (default is 1f).
+     * @param useCache Whether to use an in-memory cache for calculated math (default is true).
+     * @return A decoded [Bitmap], or null if the input is invalid.
      */
     suspend fun decode(
         blurHash: String?,
@@ -69,6 +75,9 @@ internal object BlurHashDecoder {
         return composeBitmap(width, height, numCompX, numCompY, colors, useCache)
     }
 
+    /**
+     * Decodes a base-83 encoded string into an integer.
+     */
     private fun decode83(str: String, from: Int = 0, to: Int = str.length): Int {
         var result = 0
         for (i in from until to) {
@@ -80,6 +89,9 @@ internal object BlurHashDecoder {
         return result
     }
 
+    /**
+     * Decodes the DC component color.
+     */
     private fun decodeDc(colorEnc: Int): FloatArray {
         val r = colorEnc shr 16
         val g = (colorEnc shr 8) and 255
@@ -87,6 +99,9 @@ internal object BlurHashDecoder {
         return floatArrayOf(srgbToLinear(r), srgbToLinear(g), srgbToLinear(b))
     }
 
+    /**
+     * Converts an sRGB color component to linear space.
+     */
     private fun srgbToLinear(colorEnc: Int): Float {
         val v = colorEnc / 255f
         return if (v <= 0.04045f) {
@@ -96,6 +111,9 @@ internal object BlurHashDecoder {
         }
     }
 
+    /**
+     * Decodes the AC component color.
+     */
     private fun decodeAc(value: Int, maxAc: Float): FloatArray {
         val r = value / (19 * 19)
         val g = (value / 19) % 19
@@ -109,6 +127,9 @@ internal object BlurHashDecoder {
 
     private fun signedPow2(value: Float) = value.pow(2f).withSign(value)
 
+    /**
+     * Composes the final bitmap using the decoded components.
+     */
     private fun composeBitmap(
         width: Int, height: Int,
         numCompX: Int, numCompY: Int,
@@ -177,6 +198,9 @@ internal object BlurHashDecoder {
         return this[x + numComp * y]
     }
 
+    /**
+     * Converts a linear color component back to sRGB space.
+     */
     private fun linearToSrgb(value: Float): Int {
         val v = value.coerceIn(0f, 1f)
         return if (v <= 0.0031308f) {
@@ -186,6 +210,9 @@ internal object BlurHashDecoder {
         }
     }
 
+    /**
+     * Map of characters used for base-83 encoding.
+     */
     private val charMap = listOf(
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
         'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',

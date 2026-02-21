@@ -10,6 +10,15 @@ import com.devtamuno.composeblurhash.decoder.BlurHasDecoderRequest
 import com.devtamuno.composeblurhash.decoder.BlurHashPainter
 import com.devtamuno.composeblurhash.decoder.ImageBitmapBrush
 
+/**
+ * Creates and remembers a [BlurHashPainter] that decodes the given [blurString].
+ *
+ * @param blurString The BlurHash string to decode.
+ * @param width The target width of the decoded bitmap.
+ * @param height The target height of the decoded bitmap.
+ * @param scale The scaling factor to apply to the internal decoding size (default is 0.1f).
+ * @return A [BlurHashPainter] that will draw the blurred placeholder once decoded.
+ */
 @Composable
 fun rememberBlurHashPainter(
     blurString: String,
@@ -28,6 +37,15 @@ fun rememberBlurHashPainter(
 
 }
 
+/**
+ * Creates and remembers a [Brush] that can be used for blurred background effects.
+ *
+ * @param blurString The BlurHash string to decode.
+ * @param width The target width of the decoded bitmap.
+ * @param height The target height of the decoded bitmap.
+ * @param showBlurBackgroundImage Whether to show the blurred image or a transparent brush.
+ * @return A [Brush] that either tiles the blurred image or is transparent.
+ */
 @Suppress("unused")
 @Composable
 private fun rememberBlurHashBrush(
@@ -54,5 +72,3 @@ private fun rememberBlurHashBrush(
         )
     }
 }
-
-

@@ -22,6 +22,15 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 
+/**
+ * A [Painter] that draws a blurred placeholder decoded from a BlurHash string.
+ *
+ * It uses [BlurHasDecoderRequest] to handle the decoding logic and manages its own
+ * lifecycle using [RememberObserver] to start and stop decoding when entering or leaving
+ * the composition.
+ *
+ * @param request The decoding request containing the BlurHash string and target dimensions.
+ */
 class BlurHashPainter(request: BlurHasDecoderRequest) : Painter(), RememberObserver {
 
     private var rememberScope: CoroutineScope? = null
@@ -58,6 +67,9 @@ class BlurHashPainter(request: BlurHasDecoderRequest) : Painter(), RememberObser
         }
     }
 
+    /**
+     * Updates the internal painter with the newly decoded [imageBitmap].
+     */
     private fun updatePainter(imageBitmap: ImageBitmap?) {
         if (imageBitmap == null) return
 
@@ -80,6 +92,9 @@ class BlurHashPainter(request: BlurHasDecoderRequest) : Painter(), RememberObser
         (_painter as? RememberObserver)?.onAbandoned()
     }
 
+    /**
+     * Clears the coroutine scope used for decoding.
+     */
     private fun clear() {
         rememberScope?.cancel()
         rememberScope = null
